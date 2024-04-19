@@ -1,0 +1,10 @@
+package com.demo.java8streams;
+
+public class StringListManipulation {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,29 @@
+
+Sure, here's a list of common intermediate and terminal operations in the Java Stream API:
+ 
+**Intermediate Operations:**
+ 
+1. **filter**: Filters elements of the stream based on a predicate.
+2. **map**: Transforms each element of the stream using a function.
+3. **flatMap**: Transforms each element of the stream into zero or more elements of a new stream and then flattens the streams into a single stream.
+4. **distinct**: Removes duplicate elements from the stream.
+5. **sorted**: Sorts the elements of the stream.
+6. **limit**: Truncates the stream to a specified maximum size.
+7. **skip**: Skips the specified number of elements from the beginning of the stream.
+8. **peek**: Performs an action on each element of the stream without modifying it. Useful for debugging.
+ 
+**Terminal Operations:**
+ 
+1. **forEach**: Performs an action for each element of the stream.
+2. **collect**: Accumulates the elements of the stream into a collection, such as a List, Set, or Map.
+3. **reduce**: Performs a reduction on the elements of the stream using an associative accumulation function and returns an Optional containing the reduced value.
+4. **count**: Counts the number of elements in the stream and returns a long value representing the count.
+5. **min**: Finds the minimum element of the stream based on a comparator or natural ordering and returns an Optional containing the minimum element.
+6. **max**: Finds the maximum element of the stream based on a comparator or natural ordering and returns an Optional containing the maximum element.
+7. **anyMatch**: Checks whether any element of the stream matches a given predicate and returns a boolean result.
+8. **allMatch**: Checks whether all elements of the stream match a given predicate and returns a boolean result.
+9. **noneMatch**: Checks whether none of the elements of the stream match a given predicate and returns a boolean result.
+10. **findFirst**: Returns the first element of the stream as an Optional.
+11. **findAny**: Returns any element of the stream as an Optional.
+ 
+These operations can be combined to form complex stream pipelines for data processing in Java.

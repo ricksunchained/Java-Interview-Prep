@@ -1,0 +1,8 @@
+package com.demo.java8streams;
+
+public class FrequencyOfElement {
+
+	public static void main(String[] args) {
+		
+	}
+}

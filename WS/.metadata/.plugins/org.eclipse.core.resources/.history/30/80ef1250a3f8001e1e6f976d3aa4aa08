@@ -1,0 +1,12 @@
+
+public  class Solution {
+    public int solution(int N) {
+        // Implement your solution here
+    }
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

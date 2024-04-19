@@ -1,0 +1,9 @@
+We were working on a Insurance selling platform which was used by the client for purchasing insurance  by himself 
+as well as it was used by the representative for assisting the client in purchasing an insurance. We used to not 
+just sell our own insurance but also we used to sell partner insurance as well like Allianze, Prudential.
+
+As far as architecture is consirned we were working in synchronous microservice architecture using spring cloud. 
+there were various microservices like 
+
+1)portfolio 
+2) 

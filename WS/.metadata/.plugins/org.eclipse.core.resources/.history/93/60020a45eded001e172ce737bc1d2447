@@ -1,0 +1,40 @@
+package com.demo.java8streams;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.OptionalDouble;
+import java.util.stream.Collectors;
+
+public class FilterByPersonAge {
+	public static void main(String[] args) {
+		// Create a list of Person objects
+		List<Person> people = new ArrayList<>();
+		people.add(new Person("John", 30));
+		people.add(new Person("Alice", 25));
+		people.add(new Person("Bob", 30));
+
+		// Sort the list first by age and then by name
+//		people.sort(Comparator.comparing(Person::getAge).thenComparing(Person::getName));
+
+//		people = people.stream().sorted(Comparator.comparing(Person::getAge).thenComparing(Person::getName).reversed())
+//				.collect(Collectors.toList());
+
+//		people = people.stream().sorted(Comparator.comparing(Person::getAge).thenComparing(Person::getName).reversed())
+//				.collect(Collectors.toList());
+
+//		people = people.stream().sorted(Comparator.comparing(Person::getAge).reversed().thenComparing(Person::getName))
+//				.collect(Collectors.toList());
+
+		people = people.stream().filter(e -> e.getAge() > 27).collect(Collectors.toList());
+
+		OptionalDouble avgAges = people.stream().mapToInt(e -> e.getAge()).average();
+
+		System.out.println("Avg: " + avgAges);
+
+		// Print the sorted list
+		for (Person person : people) {
+			System.out.println(person);
+		}
+	}
+}

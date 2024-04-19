@@ -1,0 +1,10 @@
+We were working on an Insurance selling platform which was used by the client for purchasing insurance  by himself as well as it was used by the representative for assisting the client in purchasing insurance. We used to not just sell our own insurance but also we used to sell partner insurance as well like Allianze, Prudential.
+As far as architecture is concerned we were working in synchronous microservice architecture using spring cloud.
+There were various microservices like
+Portfolio - for managing customer’s insurance portfolio
+Customer - for managing customer related info.
+Users - for managing representative related information
+Document - for managing Documents and esigning.
+Notification - for Sending email notification.
+Sales - Sales related information etc.
+For Database we were using postgres and created different schema for different microservice.

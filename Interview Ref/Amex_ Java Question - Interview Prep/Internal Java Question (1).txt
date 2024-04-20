@@ -1,0 +1,486 @@
+
+Java8 core technical concept  -  
+Spring boot :-  
+Rest API :-  
+Microservices :-  
+Problem solving (program ) skill  ( e.g. https://www.geeksforgeeks.org/given-sorted-array-number-x-find-pair-array-whose-sum-closest-x/)
+Sprint Hibernate
+SQL CICD, git, branching strategies and Peripheral concept :
+
+
+=======================================================
+Java is passbyreference or passbyvalue ?
+What is beanfactory ?
+What is applicationcontext?
+What is bean ?
+Bean lifecycle ?
+What is Beanwiring ? How to do wiring without autowiring ?
+Which one you prefer?
+"String".equals(var)
+var.equals("String")
+
+Difference between collections and stream ?
+Diff between FunctionalInterface vs TypeInterface ?
+Restful webservices . How to handle requests.
+=======================================================
+ 
+1.Introduce yourself , with overall experience , roles and responsibilities , technologies and previous projects.
+2.What frameworks you used and why they were required in the project (importance of WSpring , hibernate frameworks)
+3.What design patterns you have used in your project ?
+4.What are the different java features you have used ?
+5.Explain the difference between Filter and Map with example .
+6.What are the different type of dependency injections ?(Setter , Constructor , field)
+7.What are the different type of Autowiring ( by type , by name )  
+8.What are the different annotation to achieve name type autowiring (like @Qualifier)
+9.How to implement Spring security (Authentication , Authorization , https calls)
+10.How to consume a Rest API , what are the different steps
+11. How to create the Asynchronus API , why it is used and provide the implementation steps 
+12. Write a program in IDE to create a singleton class , compile and run the code and print the exact same object data while creating multiple references of the class.
+13.explain the different feature of a Singleton class
+14. Difference between Thread and Runnable 
+15. Explain the complete process for code checkout from repository till the brance merge and code push - with proper commands 
+16. How to build the code and perform deployment? Which tool will be better and why ?
+17. Have you worked on any cloud technologies ?
+18. What will happen while creating the String with literal and using "new" keyword ? Exxpalin the differene
+19. What will happen if we concat another string in both the above scenarios
+20. what is Spring MVC ? explain in detail and why it is important ? Advantages.
+21. What is Thread and advantage/disadvantage to use the threads . Explain multithreading.
+22. What are the features of String , how to make the a custom class as a key of hashmap.
+
+=======================================================
+
+
+2. On Jenkins deployment - how to trigger it
+3. Executors Framework\
+4. Future, response handling, exception handling - explained submit and execute method, throwing exceptions and tracking
+5. Problem statement - reverse number
+=======================================================
+spring microservices  question:
+
+ 1 what is diffirence between BeanFactory and Application Context?
+ 2  What are the scope of beans
+ 3 what is spring Framwork
+ 4 advantages of spring framwork
+ 5 what the feature of spring mvc
+6) What is ClassLoader in Java? From where does they load classes? and Where class related meta data are stored?
+
+ 
+=======================================================
+1. maven dependencies 
+	- suppose if there is dependency in project which is lower version than yours, how will you use yours and other together? suppose there is logging jar, yours is 1.6 latest, and their is 1.5.
+	- gradle
+	- how to handle different dependencies versions
+	- other questions on maven
+4. Classloader types
+5. Queueing mechanisms details
+6. In your project if there huge data, what you can do to process data
+7. Caching without hibernate
+8. Spring scheduling 
+	Suppose if the task of one hour spills to next hour, what can you do to remaining unprocessed data?
+9. How to implement asynchronous api?
+10. how to achieve indexing in db.
+11. lazy loading without hibernate
+12. JMS Queues used in project
+	- How can you 
+13. CompletableFuture 
+	tell about pool sizing in completable future(not in Executor framework)
+14. spring security
+	- how you can decrypt jwt token if there is project already developed
+15. shallow copying deep copying difference
+16. Spring boot API development; how you will proceed with a feature API
+17. how you develop a feature
+18. how you can deploy to production
+19. have you used dual branching in you ci/cd pipeline
+20. what you can do to hide the secret/keys using cloud-config
+21. if there is a file with large data, if half(50%) is processed and system shuts down, how you can proceed?
+22. how in your previous project dependencies were managed?
+	-> pom based approach
+23. how mockito works
+24. fibonacci program
+
+======================================================
+
+Java:
+* atomic and volatile keyword.
+* ACID principles.
+* Do you know Functional Interfaces?
+* Write a program to find a number x=10 from int arr[] = { 2, 3, 4, 10, 40 } using linear search. Modify this program using binary search. What is the complexity of finding the number in this scenario.
+* What is Hashmap and Treemap?
+* Consider there is an employee object having ID and name. 
+A, ABC
+B, BCD
+C, CDE
+How will these Employee objects be stored in Treemap.
+* Do you know what are checked exceptions? How can we pass the exceptions from Backend layer to frontend layer?
+* How many types of memory are there in Java?
+* What is a String Constant Pool?
+* Which memory is used to store a string?
+* How can you enter million records in a database using JDBC?
+* Suppose for a payments project the amount is debited from the customer but the credit transaction fails for the merchant. How can you solve this scenario?
+* What is ciel and floor in Java?
+* What are the REST methonds?
+* How will you build a REST API?
+* Is GET idempotent? What about PUT, POST, PATCH and DELETE?
+* How to create a REST api to delete an employee?
+* How can I test the above delete API using Postman?
+* How can we add security to the REST API?
+* What is the error code for Unauthorized access?
+* What is the error code for a Bad Request?
+
+======================================================
+
+what is hibernate 
+what is transaction annotation,how to use it
+how to check http health ,
+what is cache in hibernate
+defference between soap and rest
+write a programm to reverse array and store it in same array
+
+
+
+
+1. Java 8 Features
+
+"apple","apple","orange","orange", "pineapple"
+
+2. Print count of each element of the above list.
+3. Print length of each element of the above list.
+4. Multithreading  and Future Class
+5. HashMap 
+6. Git
+7. Jenkins and deployment  steps
+8. difference between recursion and iteration
+9. Spring Security
+10. Synchronous and Asynchronous communication
+11. Springboot exception handling
+=====================================================================================================
+1)Types of class loader and there calling sequence.
+2)How garbage collection works in java(what is minor GC ,major GC,types of garbage collector and algoritham used, is garbage collector stop world event ,if yes then what is the impact of it on Running application).
+3)what is stack over flow error and out of memory error(what is difference in between them, if we want to explicitly  create thease issues how can we do).
+4) how subString() works in java and how it leads to memory leakage.
+5) java 8 features(what is optional class, difference between map and flatmap method, stream apis,what is terminal opration and intermediate operations)
+6)how we call Async method using executable framwork
+7)SAGA Design pattern .
+
+
+Questions in Second round
+1)How can scale up API,(if 2 instance of API is running ,each instance handling 50 request per second ,if one of them is down ,how will ypu make sure that running instance will handle all 100 request).
+
+2)basic questions about CICD ,jenkins, GIT,Sonar.
+3) what is fault tollerence and Circuit breaker pattern, which tool you have used to Achive it.
+4) what will be the Aproach when production issue occure (will you report to pros support team or you will Resolve it,what if you have current sprint task as well , which will you do first prod issue or regular work..if you work on prod issue how will manage your work ,will you give extra hours to complete it or you will let it spill over) such type of many scenario oriented questions.
+5)java 11 featrs.
+6) Repeated question in both the round (what is diffrence between stack overflow error and out of memory error)
+
+=====================================================================================================
+
+java 8 : 
+ 1 What are feature of Java8
+ 2  What is Functional Interface?
+ 3 Why we use FunctionInterface annotation?
+ 4 What is Stream api? 
+5 what are intermediant  stream operation
+6 can we override static method ?
+
+ 
+
+
+--------------sourabh------------
+- introduce yourself
+- explain last project and your roles and responsibilities
+- write program for checking string palindrome
+- refactor same program
+- difference between sleep and wait method
+- any experience in open source technology
+
+--------------tajamul---------------------- 
+- introduce yourself
+- explain last project and your roles and responsibilities
+- what type of defects you fixed
+- write program to reverse integer array without using different array / collection.
+
+
+
+
+
+
+===========================================================================
+
+questions based on string manipulationInternal
+ working of hashmap Internal 
+ working of  treemap and 
+ time complexity with example 
+ how you test your apiSpring security,
+  how to secure rest API.
+How to debug your application 
+Examples:
+Input: arr[] = {10,22, 28, 30, 40}, x= 54
+Output: 52
+Explanation:  If we calculate the sum of the output closest macth of the x
+How treemap works internally
+Why String constent pool is available in java  
+
+Raghu: https://www.geeksforgeeks.org/given-sorted-array-number-x-find-pair-array-whose-sum-closest-x/
+
+===========================================================================
+Stream terminal operation or intermediate operation
+Reduce flat map. FlatMap vs Reduce for mapping and filtering 
+Convert list into a map
+There is Radom string find a pattern in that string
+how to make Async API Call
+Design pattern
+Executor framework
+best way to implement Thread
+HashMap internal implementation
+
+
+ ===========================================================================
+- Design patterns
+- Write a program for singleton class
+-what is String, explain in details
+- questions based on string manipulation
+- what is GC.
+- Stack overflow, outofmemmory errors.
+- how GC woks and it's importance.
+- Multithreading
+-why spring, features of spring.
+-dependency injection and it's type
+- spring/spring boot annotations
+- Spring security, how to secure rest API.
+-SQL queries, Joins
+
+
+================================= ==========================================
+
+1. Java 8 questions - Stream api and lamda expressions related questions
+2. Difference between map and flatmap?
+3. Spring annotations and its use?
+4. Previous project architecture and explanation?
+5. Collection api related questions?
+6. using given array of elements.. sort and display the rank of students
+
+===========================================================================
+1 roles and responsibilities
+2.api security
+3.multithreading
+4.spring and spring boot - which one is better and usage of apringboot
+5.wap to print even no from 1 to 20
+Optimise it without using i%2==0
+Optimise it such that it will work in O(1)
+
+===========================================================================
+Roles and Responsibility in the previous projectSpring
+ Boot FeaturesSpring Boot 
+ securityMultithreading and Thread Pool
+ How to debug an error in spring boot applicationHow to scale your application for increase in demand
+
+Program to print even numbers in the range 1 to 20
+
+public class EvenNumbers {
+
+               public static void printEvenNumbers(int n) {
+                              
+                              System.out.println("Even Numbers from 1 to " + n + ":");
+                              int i=1;
+                              
+                              while(i <= n){
+                                             if(i % 2 == 0)
+                                                            System.out.print(" " + i);
+                                             
+                                             i++;
+                              }
+                              // IntStream.range(1, n+1 ).filter(n -> n % 2 == 0).forEach(System.out::println);
+               }
+               public static void main(String args[]) {
+                              int n = 20;
+                              printEvenNumbers(n);
+               }
+}
+ 
+
+
+===========================================================================
+1.There are 10 records to be inserted using workflow, what happens to the records which are yet to be inserted but workflow is down.
+How do we handle such scenarios.
+
+2.POST and PUT which is idempotent in nature?
+PUT is idempotent.
+
+3.what are the types in which a GET API can be invoked?
+Through path variable and request param
+
+4.Internal implementation of HashMap
+
+5.Why SET does not allow duplicate entries
+Because it uses hashMap internally to store data.
+
+6.Mutable and immutable differences.
+
+7.string, StringBuffer and StringBuilder differences.
+
+8.Singleton pattern to demonstate
+
+9.How to sort hashmap if we have object as a key?
+
+============================= + ==============================================
+1 - Roles and responsibility in previous organization
+2 - Functional Programming
+3 - Throwing exception from stream or lambda expression
+4 - Factorial Program
+5 - JUnit
+6 - Performance Testing
+7 - Hashmap
+8 - Stream
+9 - Basic java concepts
+10 - CI/CD Pipeline
+11 - Vertex
+12 - Spring Security and its implementation in securing API 
+
+
+
+===========================================================================
+What was your role in the previous organization.
+What difficulties you faced and how you overcame it.
+what technologies and frameworks you used 
+how to scale your application/apis for increased demand.
+how to secure you apis
+what is use of threadpool
+how you used multithreading
+Program: print even number in the range (1,20)
+what are streams
+
+===========================================================================
+
+Inroduce your self and the technologies have been working so far.
+What was the roles and responsibility in the previous project.
+What was the most challenging task in the last project and how you over come it.
+Java Progam:
+   write bullet froof method which takes list as a parameter which contaig the string data and the output of that method is list which only contains those string which has length more than 20.
+
+How the above method will handle exceptions.
+How can you writer the j unit of the above method.
+What is the  multithreading concept how you can implement it.
+Java 8 concept.
+
+
+
+===========================================================================
+
+1.Explain my previous Projects role and development flow
+2. is any issue(bug,problem) solve during working time in project Explain it
+Java 8 Core concepts
+1. Predicate real time use scenario
+2. Stream real time use scenario
+Spring Boot
+
+Problem Solving (programm)
+1. print even numbers upto 20 by using for loop/ Java 8 (i explain by using lambda)
+
+ 
+
+
+=============================answer==============================================
+
+ From integer array, find the maximum sum of 3 consecutive numbers like 
+
+Ans : class ConsecutiveNumberSum {
+public static void main(String[] args) {
+int s [] = {11,21,3,4,2,100,110};
+int sum = 0;
+for(int i =0; i<=s.length-3; i++){
+int currentSum = s[i] + s[i+1]+ s[i+2];
+if(sum < currentSum){
+sum = currentSum;
+}
+}
+System.out.println("Highest Sum :" +sum);
+}
+}
+
+2. How will you create REST API for above code?
+Ans : In RestController, I will add @Postmapping("/max-sum")
+Then, call service layer and there do above calculation and return result to controller.
+From controller, given response to client.
+
+3. AMEX is working on Java 11 so please share new feature in Java 11
+
+3. Explain packaging and deployment
+Ans : From spring boot project we can use gradle for packaging and will get jar file for deployment.
+
+4. Explain about security to REST API.
+Ans : Following Role based Security, First authentication will be done and then will get token in response. 
+Using that token we can identify role and then it's access rights.
+
+5. How will you optimize of application vertically?
+Ans : Add multiple App server so that multiple requests can be serviced well. We can keep minimum count of App servers 
+as per out load and scale it up as per requirement whenever needed. e.g. Suppose there is sudden increase in no. of request and we have less app servers and those are fully occupied
+and out load balancer can not send more request to existing app servers then on demand we can spin up more app servers as per need and once need is fulfilled and request are less 
+then we can turn them down.
+
+6. How to mitigate attacks?
+Ans : If there are invalid request are coming in then one layer of our application will filter it out and we can accept only valid request by recognizing the expected pattern.
+	  And also we can block that source from where requests are coming in.
+
+7. How to create One To Many Relationship?
+
+8. Explain unit test cases and how will you write it?
+Ans : Explain different test cases for above code. Explain about Junit and mockito framework.
+
+9. In spring boot how to ensure test are invoked?
+Ans : Mention test repository in gradle/pom file.
+
+10. How to support transactions?
+Ans : Using @Transactional will be  helpful to handle transactions. Also need to mention datasource alsong with it as different db support transactions different way.
+
+11. How to debug production issues?
+Ans : By looking at the logs or by checking the behaviour of the requests made by particular user.
+
+12. What is tracing?
+Ans : Tracing is tracking a particular transaction/request from a user. At start of application we can given an id to request and then we can track that particular transaction.
+
+13. What is OutOfMemory Error?
+Ans : This error is thrown when there is insufficient space to allocate an object in the Java heap.
+
+14. Check if a pair exists with given
+Given an array A[] of n numbers and another number x, the task is to check whether or not there exist two elements in A[] whose sum is exactly x.
+
+Examples:
+Input: arr[] = {0, -1, 2, -3, 1}, x= -2
+Output: Yes
+Explanation:  If we calculate the sum of the output,1 + (-3) = -2
+
+Input: arr[] = {1, -2, 1, 0, 5}, x = 0
+Output: No
+public class Tst1 {
+
+==========================solution=================================================
+
+   public static boolean m1(int[] A,int size, int y){
+        for(int i=0; i<(size-1);i++){
+            for(int j=(i+1); j<size;j++){
+                if(A[i]+A[j]==y){
+                    return true;
+                    
+                    
+                }
+            }
+            
+        }
+        return false;
+        
+    }
+    
+    public static void main(String[] args) {
+        
+        int[] A={1, -2, 1, 0, 5};
+        int y =0;
+        int size = A.length;
+        if(m1(A,size,y)){
+            System.out.println("yes");
+            
+        }else{
+            System.out.println("No");
+        }
+    }
+}
+

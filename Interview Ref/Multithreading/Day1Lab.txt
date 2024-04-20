@@ -1,0 +1,260 @@
+Lab7 - wait notify
+Lab6 - Deadlock
+Lab5 - Lab5.java 
+    import java.util.List;
+
+    class Lab5Helper implements Runnable {
+        private List<String> list ;
+        // write 
+            constructor to accept list and	
+            run method to add 10 items in list
+    }
+    public class Lab5 {
+    public static void main(String[] args) {
+        // create 5 threads with same list and print length of list in main after threads complete
+    }
+    }
+    -> two options ->1. synchronized block / synchronized list
+        import java.util.ArrayList;
+        import java.util.Collections;
+        import java.util.List;
+
+        class Lab5Helper implements Runnable {
+            private List<String> list;
+
+            public Lab5Helper(List<String> list) {
+                this.list = list;
+            }
+
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+            //Option1 - Synchronized block	
+                        list.add("str" + i);	
+                }
+            }
+        }
+        public class Lab5 {
+            public static void main(String[] args) throws InterruptedException {
+                //List<String> list  = new ArrayList<String>();
+                // Option2  = synchronized list
+                List<String>  list = Collections.synchronizedList(new ArrayList());
+                List<Thread> threadlist = new ArrayList<Thread>();
+                for (int i = 0; i < 5; i++) {
+                    Thread t1 = new Thread(new Lab5Helper(list));
+                    threadlist.add(t1);
+                    t1.start();
+                }
+                for (int i = 0; i < 5; i++) {
+                    threadlist.get(i).join();
+                }
+                System.out.println("Current List Size = " + list.size());
+        }
+        }
+Lab4 - Lab4.java 
+        Create a class Bank (int balance + get/set)
+        Create a Thread Deposit 
+            accept Bank in constructor 
+            in run method
+                500 times
+                    take balance in local variable
+                    increment localvariable
+                    random sleep (0 ..1000 milliseconds)
+                    modify balance 
+        Create a Thread Widraw 
+            same like deposit just decrement
+        Lab4 main
+            create two threads and start 
+            When both the threads are over, 
+                print current balance in main 
+
+                import java.util.Iterator;
+
+                class Deposit implements Runnable {
+                    private Bank bank;
+
+                    public Deposit(Bank bank) {
+                        this.bank = bank;
+                    }
+
+                    @Override
+                    public void run() {
+                        for (int i = 0; i < Lab4.count; i++) {
+                            synchronized (bank) {
+                                int bal = bank.getBalance();
+                                bal++;
+                                try {
+                                    Thread.sleep((int) (Math.random() * 1000));
+                                } catch (Exception e) {
+                                }
+                                bank.setBalance(bal);
+                            }
+                            System.out.println("in Deposit - i = " + i + " and current balance = " + bank.getBalance());
+                        }
+                    }
+                }
+
+                class Widraw implements Runnable {
+                    private Bank bank;
+
+                    public Widraw(Bank bank) {
+                        this.bank = bank;
+                    }
+
+                    @Override
+                    public void run() {
+                        for (int i = 0; i < Lab4.count; i++) {
+                            synchronized (bank) {
+                                int bal = bank.getBalance();
+                                bal--;
+                                try {
+                                    Thread.sleep((int) (Math.random() * 1000));
+                                } catch (Exception e) {
+                                }
+                                bank.setBalance(bal);
+                            }
+                            System.out.println("in Widraw - i = " + i + " and current balance = " + bank.getBalance());
+                        }
+                    }
+                }
+
+                class Bank {
+                    private int balance;
+
+                    public int getBalance() {
+                        return balance;
+                    }
+
+                    public void setBalance(int balance) {
+                        this.balance = balance;
+                    }
+                }
+
+                public class Lab4 {
+                    static int count = 20;
+
+                    public static void main(String[] args) throws InterruptedException {
+                        Bank b1 = new Bank();
+                        Thread t1 = new Thread(new Deposit(b1));
+                        Thread t2 = new Thread(new Widraw(b1));
+                        t1.start();
+                        t2.start();
+                        System.out.println("------------Main --------Current balance = " + b1.getBalance());
+                        t1.join();
+                        t2.join();
+                        System.out.println("------------Main --------Current balance = " + b1.getBalance());
+                    }
+                }
+
+Lab3 - Out of three thread, once one thread gets over, stop others, main thread to wait for t1
+    import java.util.Scanner;
+
+    class Lab3Helper1 extends Thread{
+        private String name;
+        
+        public Lab3Helper1(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public void run() {
+            System.out.println( name + " is running is thread " + Thread.currentThread().getName());
+            for (int i  = 0 ;i < Lab3.count && Lab3.contin ; i++) {
+                System.out.println(name + i);
+                try{Thread.sleep((int)(Math.random()*1000));}catch(Exception e) {}
+            }
+            if (Lab3.contin == true) {
+                Lab3.contin = false;
+                Lab3.winner = name;
+            }
+        }
+    }
+
+    public class Lab3 {
+        static int count = 10;
+        static boolean contin = true;
+        static String winner= "";
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Please enter a number to continue");
+            scanner.nextInt();
+            System.out.println("Main is running is " + Thread.currentThread().getName());
+            Lab3Helper1 t1 = new Lab3Helper1("carone");
+            Lab3Helper1 t2 = new Lab3Helper1("cartwo");
+            Lab3Helper1 t3 = new Lab3Helper1("carthree");
+            t1.start();
+            t2.start();
+            t3.start();
+            try {
+                t1.join();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            System.out.println("---------Finished Race, Winner is " +  winner);
+                
+        };
+    }
+
+Lab2 - Create new class - Lab2
+        Create threads using 3 options
+            1. extends thread
+            2. Implements Runnable
+            3. java 8 - lambda 
+            In each code -> run for loop 20 times  
+        main -
+            start all three threads
+        Observe - 1. TimeSlicing
+                  2. Different Thread finishes/starts
+    
+        class Lab2Helper1 extends Thread{
+        @Override
+        public void run() {
+            for (int i  = 0 ;i < Lab2.count ; i++) {
+                System.out.print(".");
+            }
+        }
+    }
+    class Lab2Helper2 implements Runnable{
+        public void run() {
+            for (int i  = 0 ;i < Lab2.count ; i++) {
+                System.out.print("x");
+            }
+        };
+    }
+    public class Lab2 {
+        static int count = 20000;
+        public static void main(String[] args) {
+        Runnable lab2helper3 = ()->{
+            for (int i  = 0 ;i < Lab2.count ; i++) {
+                System.out.print("o");
+            }
+        };
+        Lab2Helper1 t1 = new Lab2Helper1();
+        Thread t2 = new Thread(new Lab2Helper2());
+        Thread t3 = new Thread(lab2helper3);
+        t1.start();
+        t2.start();
+        t3.start();
+        }
+    }
+
+
+Lab1 - 
+        Create a new project  - Demo1 
+        Create a new class Lab1 
+            import java.util.Scanner;
+
+            public class Lab1 {
+                public static void main(String[] args) {
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("Please enter a number to continue");
+                    scanner.nextInt();
+                    System.out.println("Hello World !!!");
+                }
+            }
+        run  (don't enter number)
+        cmd>jconsole / jvisualvm
+            select Lab1 and observe threads
+            
+        

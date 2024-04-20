@@ -1,0 +1,428 @@
+Lab10 - Lab7 - Renetrant lock
+        import java.awt.image.renderable.RenderableImage;
+        import java.util.concurrent.locks.ReentrantLock;
+
+        class Deposit implements Runnable {
+            private Bank bank;
+            private ReentrantLock mylock;
+
+            public Deposit(Bank bank, ReentrantLock lock) {
+                this.bank = bank;
+                this.mylock = lock;
+            }
+
+            @Override
+            public void run() {
+                for (int i = 0; i < Lab7.count; i++) {
+                    mylock.lock();
+                    int bal = bank.getBalance();
+                    bal++;
+                    try {
+                        Thread.sleep((int) (Math.random() * 100));
+                    } catch (Exception e) {
+                    }
+                    bank.setBalance(bal);
+                    mylock.unlock();
+                    System.out.println("in Deposit - i = " + i + " and current balance = " + bank.getBalance());
+                }
+            }
+        }
+
+        class Widraw implements Runnable {
+            private Bank bank;
+            private ReentrantLock mylock;
+
+            public Widraw(Bank bank, ReentrantLock lock) {
+                this.bank = bank;
+                this.mylock = lock;
+            }
+
+            @Override
+            public void run() {
+                for (int i = 0; i < Lab7.count; i++) {
+                    mylock.lock();
+                    int bal = bank.getBalance();
+                    bal--;
+                    try {
+                        Thread.sleep((int) (Math.random() * 100));
+                    } catch (Exception e) {
+                    }
+                    bank.setBalance(bal);
+                    mylock.unlock();
+                    System.out.println("in Widraw - i = " + i + " and current balance = " + bank.getBalance());
+                }
+            }
+        }
+
+        class Bank {
+            private int balance;
+
+            public int getBalance() {
+                return balance;
+            }
+
+            public void setBalance(int balance) {
+                this.balance = balance;
+            }
+        }
+
+        public class Lab7 {
+            static int count = 20;
+
+            public static void main(String[] args) throws InterruptedException {
+                Bank b1 = new Bank();
+                ReentrantLock lock = new ReentrantLock();
+                Thread t1 = new Thread(new Deposit(b1, lock));
+                Thread t2 = new Thread(new Widraw(b1, lock));
+                t1.start();
+                t2.start();
+                System.out.println("------------Main --------Current balance = " + b1.getBalance());
+                t1.join();
+                t2.join();
+                System.out.println("------------Main --------Current balance = " + b1.getBalance());
+            }
+        }
+
+Lab9 - Cyclic Barrier  (Lab6)
+        read https://www.baeldung.com/java-cyclicbarrier-countdownlatch
+        import java.util.concurrent.CyclicBarrier;
+
+        class Lab6Helper implements Runnable{
+            private String name ;
+            private CyclicBarrier barrier;
+            public Lab6Helper(String name, CyclicBarrier barrier) {
+                super();
+                this.name = name;
+                this.barrier = barrier;
+            }
+            @Override
+            public void run() {
+                try {
+                System.out.println("Starting from Pune " + Thread.currentThread().getName());
+                Thread.sleep((int)(Math.random()*1000));
+                System.out.println("Reached Satara " + Thread.currentThread().getName());
+                barrier.await();
+                System.out.println("Leaving  Satara " + Thread.currentThread().getName());
+                
+                Thread.sleep((int)(Math.random()*1000));
+                System.out.println("Reached Belgaon " + Thread.currentThread().getName());
+                barrier.await();
+                System.out.println("Leaving  Belgoan" + Thread.currentThread().getName());
+                Thread.sleep((int)(Math.random()*1000));
+                System.out.println("Reached Goa " + Thread.currentThread().getName());
+                
+                }catch(Exception e) {
+                    System.out.println("");
+                }
+            }
+        }
+        public class Lab6 {
+        public static void main(String[] args) {
+            CyclicBarrier barrier = new CyclicBarrier(3);
+            Thread t1 = new Thread(new Lab6Helper("car1", barrier));
+            t1.setName("car1");
+            Thread t2 = new Thread(new Lab6Helper("car2",barrier));
+            t2.setName("car2");
+            Thread t3 = new Thread(new Lab6Helper("car3", barrier));
+            t3.setName("car3");
+            t1.start();
+            t2.start();
+            t3.start();
+        }
+        }
+Lab8 - CountDownLatch
+        import java.util.Scanner;
+        import java.util.concurrent.CountDownLatch;
+
+        class Lab5Helper1 extends Thread{
+            private String name;
+            private CountDownLatch latch;
+            public Lab5Helper1(String name, CountDownLatch latch) {
+                this.name = name;
+                this.latch = latch;
+            }
+
+            @Override
+            public void run() {
+                System.out.println( name + " is running is thread " + Thread.currentThread().getName());
+                for (int i  = 0 ;i < Lab5.count && Lab5.contin ; i++) {
+                    System.out.println(name + i);
+                    try{Thread.sleep((int)(Math.random()*1000));}catch(Exception e) {}
+                }
+                if (Lab5.contin == true) {
+                    Lab5.contin = false;
+                    Lab5.winner = name;
+                }
+                latch.countDown();
+            }
+        }
+
+        public class Lab5 {
+            static int count = 5;
+            static boolean contin = true;
+            static String winner= "";
+            
+            public static void main(String[] args) {
+                CountDownLatch latch = new CountDownLatch(3);
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Please enter a number to continue");
+                scanner.nextInt();
+                System.out.println("Main is running in " + Thread.currentThread().getName());
+                Lab5Helper1 t1 = new Lab5Helper1("carone", latch);
+                Lab5Helper1 t2 = new Lab5Helper1("cartwo", latch);
+                Lab5Helper1 t3 = new Lab5Helper1("carthree", latch);
+                t1.start();
+                t2.start();
+                t3.start();
+                try {
+                    latch.await();
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                System.out.println("---------Finished Race, Winner is " +  winner);
+                    
+            };
+        }
+
+Lab7 - Lab4 - schedule
+        import java.util.Date;
+        import java.util.concurrent.Executors;
+        import java.util.concurrent.ScheduledExecutorService;
+        import java.util.concurrent.TimeUnit;
+
+        class Lab4Helper implements Runnable {
+            @Override
+            public void run() {
+                System.out.println(new Date());
+            }
+        }
+
+        public class Lab4 {
+            public static void main(String[] args) {
+                System.out.println("-------Main " + new Date());
+                ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
+            //	ses.schedule(new Lab4Helper(), 2, TimeUnit.SECONDS);
+                ses.scheduleAtFixedRate(new Lab4Helper(),5,2,TimeUnit.SECONDS);
+            }
+        }
+        Find Difference between scheduleAtFixedRate and scheduleWithFixedDelay
+
+Lab6 - Lab3.java - Future and Callable
+    import java.util.concurrent.Callable;
+    import java.util.concurrent.ExecutionException;
+    import java.util.concurrent.ExecutorService;
+    import java.util.concurrent.Executors;
+    import java.util.concurrent.Future;
+
+    class Lab3Helper implements Callable<Integer> {
+        private int no1;
+        private int no2;
+
+        public Lab3Helper(int no1, int no2) {
+            this.no1 = no1;
+            this.no2 = no2;
+        }
+
+        @Override
+        public Integer call() throws Exception {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Ans in thread is " + (no1 + no2));
+            return no1 + no2;
+        }
+
+    }
+
+    public class Lab3 {
+        public static void main(String[] args) throws InterruptedException, ExecutionException {
+            Lab3Helper helper = new Lab3Helper(110, 220);
+            ExecutorService service = Executors.newSingleThreadExecutor();
+            Future<Integer> future = service.submit(helper);
+            System.out.println("After Future..................");
+            System.out.println("Get answer in future = " + future.get());
+
+        }
+    }
+
+Lab5 - Lab2.java  -> Future with Runnable
+
+        import java.util.concurrent.ExecutionException;
+        import java.util.concurrent.ExecutorService;
+        import java.util.concurrent.Executors;
+        import java.util.concurrent.Future;
+
+        class Lab2Helper implements Runnable {
+            private int no1;
+            private int no2;
+            private int ans;
+
+            public Lab2Helper(int no1, int no2) {
+                this.no1 = no1;
+                this.no2 = no2;
+            }
+
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                this.ans = no1 + no2;
+                System.out.println("Ans in thread is " + ans);
+            }
+
+            public int getAns() {
+                return ans;
+            }
+
+        }
+
+        public class Lab2 {
+            public static void main(String[] args) throws InterruptedException, ExecutionException {
+                    Lab2Helper helper = new Lab2Helper(110, 220);
+                    ExecutorService service = Executors.newSingleThreadExecutor();
+                    Future<Lab2Helper> future = service.submit(helper, helper);
+                    System.out.println("After Future..................");
+                    System.out.println("Get answer in future = " + future.get().getAns());
+
+            }
+        }
+
+Lab4 - Demo3/Lab1.java 
+    import java.util.concurrent.ExecutorService;
+    import java.util.concurrent.Executors;
+
+    class Lab1Helper1 extends Thread {
+        @Override
+        public void run() {
+            for (int i = 0; i < Lab1.count; i++) {
+                System.out.println(". " + Thread.currentThread().getName());
+            }
+        }
+    }
+
+    class Lab1Helper2 implements Runnable {
+        public void run() {
+            for (int i = 0; i < Lab1.count; i++) {
+                System.out.println("x " + Thread.currentThread().getName());
+                //if (i == 1)
+                //	throw new RuntimeException("Some Problem");
+            }
+        };
+    }
+
+    public class Lab1 {
+        static int count = 5;
+
+        public static void main(String[] args) {
+            Runnable lab2helper3 = () -> {
+                for (int i = 0; i < Lab1.count; i++) {
+                    System.out.println("o " + Thread.currentThread().getName());
+                }
+            };
+            //	ExecutorService service = Executors.newSingleThreadExecutor();
+            ExecutorService service = Executors.newFixedThreadPool(3);
+        //	ExecutorService service = Executors.newCachedThreadPool();
+            service.execute(new Lab1Helper1());
+            service.execute(new Lab1Helper2());
+            service.execute(lab2helper3);
+
+            
+            System.out.println("finishing main");
+            service.shutdown();
+        }
+    }
+    Swich between three service types (singlethread, fixed, cached-> increase execute requests and watch )
+
+Lab3 - Create ThreadGroup
+        Modify Lab1 to create two groups 
+            1 for fast cars
+            2 for avg speed cars
+        Print group information
+Lab2 - Daemon thread
+    class Lab2Helper implements Runnable {
+        public void run() {
+            for (int i = 0; i < Lab2.count; i++) {
+                System.out.print("x");
+            }
+        };
+    }
+
+    public class Lab2 {
+        static int count = 200;
+
+        public static void main(String[] args) {
+            System.out.println("Starting main");
+            Thread t2 = new Thread(new Lab2Helper());
+            t2.setDaemon(true);
+            t2.start();
+            System.out.println("Ending main");
+        }
+    }
+
+Lab1 - Priority
+    import java.util.Scanner;
+
+    class Lab1Helper1 extends Thread{
+        private String name;
+        
+        public Lab1Helper1(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public void run() {
+            System.out.println( name + " is running is thread " + Thread.currentThread().getName());
+            for (int i  = 0 ;i < Lab1.count && Lab1.contin ; i++) {
+                int k = i * 1010101/400029;
+            //	System.out.println(name + i);
+        //		try{Thread.sleep((int)(Math.random()*1000));}catch(Exception e) {}
+            }
+            if (Lab1.contin == true) {
+                Lab1.contin = false;
+                Lab1.winner = name;
+            }
+        }
+    }
+
+    public class Lab1 {
+        static int count = 200000;
+        static boolean contin = true;
+        static String winner= "";
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Please enter a number to continue");
+            scanner.nextInt();
+            System.out.println("Main is running is " + Thread.currentThread().getName());
+            Lab1Helper1 t1 = new Lab1Helper1("carone");
+            Lab1Helper1 t2 = new Lab1Helper1("cartwo");
+            Lab1Helper1 t3 = new Lab1Helper1("carthree");
+            Lab1Helper1 t4 = new Lab1Helper1("Fcarone");
+            Lab1Helper1 t5 = new Lab1Helper1("Fcartwo");
+            Lab1Helper1 t6 = new Lab1Helper1("Scarthree");
+            t4.setPriority(Thread.MAX_PRIORITY);
+            t5.setPriority(Thread.MAX_PRIORITY);
+            t6.setPriority(Thread.MIN_PRIORITY);
+            t1.start();
+            t2.start();
+            t3.start();
+            t4.start();
+            t5.start();
+            t6.start();
+            
+            try {
+                t1.join();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            System.out.println("---------Finished Race, Winner is " +  winner);
+                
+        };
+    }
